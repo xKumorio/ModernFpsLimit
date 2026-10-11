@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        shell: cmd
+        run: build.bat
+
+      - name: Tests
+        shell: cmd
+        run: tests\run.bat
+        continue-on-error: true # timing tests on a shared runner are noisy
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ModernFpsLimit
+          path: build/ModernFpsLimit.asi
+
+      - name: Release
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: ModernFpsLimit build ${{ github.run_number }}
+          body: ${{ github.event.head_commit.message }}
+          files: build/ModernFpsLimit.asi
+          make_latest: true
