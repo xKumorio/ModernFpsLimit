@@ -25,8 +25,6 @@ const char kDefaultFile[] =
 	"fresh_input=1\r\n"
 	"; 1 = держать выключенным встроенный в игру Frame Limiter, пока включён этот лимит (иначе их два)\r\n"
 	"game_limiter_off=1\r\n"
-	"; 1 = строка в чате SA-MP при подключении\r\n"
-	"greeting=1\r\n"
 	"; 1 = приоритет игры \"выше среднего\": браузер и другие программы не отбирают у неё ядро посреди кадра\r\n"
 	"above_priority=1\r\n";
 
@@ -45,7 +43,6 @@ void Config::Load(const char *path)
 	fps = (int)GetPrivateProfileIntA(kSection, "fps", fps, path_);
 	freshInput = GetPrivateProfileIntA(kSection, "fresh_input", freshInput, path_) != 0;
 	gameLimiterOff = GetPrivateProfileIntA(kSection, "game_limiter_off", gameLimiterOff, path_) != 0;
-	greeting = GetPrivateProfileIntA(kSection, "greeting", greeting, path_) != 0;
 	abovePriority = GetPrivateProfileIntA(kSection, "above_priority", abovePriority, path_) != 0;
 }
 

@@ -52,7 +52,7 @@ void App::OnFrameStart()
 	if (held && config_.freshInput) gta::PumpMessages();
 	if (limiter_.Fps() && config_.gameLimiterOff) gta::TurnBuiltInLimiterOff();
 	if (!sampAttached_ && samp::Ready()) AttachToSamp();
-	if (sampAttached_ && config_.greeting) Greet();
+	if (sampAttached_) Greet();
 }
 
 void App::AttachToSamp()

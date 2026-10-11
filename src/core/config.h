@@ -6,7 +6,6 @@ struct Config {
 	int fps = 150; // 0 = off
 	bool freshInput = true;
 	bool gameLimiterOff = true;
-	bool greeting = true;
 	bool abovePriority = true;
 
 	void Load(const char *path);
